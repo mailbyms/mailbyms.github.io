@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>开发规范 | 那山.那樹.那豬</title><meta name="keywords" content="java,规范,vue"><meta name="author" content="mailbyms@gmail.com"><meta name="copyright" content="mailbyms@gmail.com"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="开发规范开发工具 Java 项目使用 IntelliJ IDEA 建议安装插件 SonarLint 和 Alibaba Java Coding Guidelines ，在开发过程使用这2个插件检查代码   网站开发使用 Visual Studio Code  通用 配置文件  不要在代码里 hard code 外部接口地址等，要写到配置文件里  不是本项目实现的、要调用别人的功能，都属于外部接口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发规范">
+<meta property="og:url" content="https://mailbyms.github.io/2021/02/22/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="那山.那樹.那豬">
+<meta property="og:description" content="开发规范开发工具 Java 项目使用 IntelliJ IDEA 建议安装插件 SonarLint 和 Alibaba Java Coding Guidelines ，在开发过程使用这2个插件检查代码   网站开发使用 Visual Studio Code  通用 配置文件  不要在代码里 hard code 外部接口地址等，要写到配置文件里  不是本项目实现的、要调用别人的功能，都属于外部接口">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-02-22T08:51:07.000Z">
+<meta property="article:modified_time" content="2021-07-30T03:22:26.537Z">
+<meta property="article:author" content="mailbyms@gmail.com">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="规范">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mailbyms.github.io/2021/02/22/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '开发规范',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-30 11:22:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">那山.那樹.那豬</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">开发规范</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-02-22T08:51:07.000Z" title="发表于 2021-02-22 16:51:07">2021-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-30T03:22:26.537Z" title="更新于 2021-07-30 11:22:26">2021-07-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B/">研发流程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="开发规范"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h1><h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><ul>
+<li>Java 项目使用 <code>IntelliJ IDEA</code><ul>
+<li>建议安装插件 <code>SonarLint</code> 和 <code>Alibaba Java Coding Guidelines</code> ，在开发过程使用这2个插件检查代码</li>
+</ul>
+</li>
+<li><h2 id="网站开发使用-Visual-Studio-Code"><a href="#网站开发使用-Visual-Studio-Code" class="headerlink" title="网站开发使用 Visual Studio Code"></a>网站开发使用 <code>Visual Studio Code</code></h2></li>
+</ul>
+<h2 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h2><ul>
+<li><p>配置文件</p>
+<ul>
+<li><p>不要在代码里 hard code <code>外部接口</code>地址等，要写到配置文件里</p>
+</li>
+<li><p>不是本项目实现的、要调用别人的功能，都属于<code>外部接口</code></p>
+</li>
+<li><p>不允许＂换个环境部署＂或 ＂改个接口地址＂就要重新编译代码打包，用配置文件解决</p>
+</li>
+<li><p>不允许针对不同环境使用不同的编译命令，例如正式和测试环境分别使用下面命令编译 <code>npm run build-pro</code>, <code>npm run build-dev</code>，这是不对的。应使用通用的编译命令，通过配置文件调整参数</p>
+</li>
+<li><p>配置文件里每个变量，应只有一个赋值。</p>
+<ul>
+<li>赋值要简单、直接</li>
+<li>不允许在同一个配置文件里列出“测试”、”正式” 等多个环境对应的值，再经过第二层判断选定</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>事务</p>
+<ul>
+<li><p>例如购买行为，要按订单流程走：生成订单、支付扣款。记录流程对应的中间状态</p>
+</li>
+<li><p>在 生成订单和支付扣款的处理中，分别要加上分布式锁</p>
+</li>
+</ul>
+</li>
+<li><p>安全</p>
+<ul>
+<li>《Web应用安全开发规范-V1.5.docx》，注意最后章节的附件</li>
+</ul>
+</li>
+</ul>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h3 id="常见的性能瓶颈"><a href="#常见的性能瓶颈" class="headerlink" title="常见的性能瓶颈"></a>常见的性能瓶颈</h3><ul>
+<li><p>DB数据库</p>
+<ul>
+<li><p>Java 代码可以多实例多线程，可以水平扩展</p>
+</li>
+<li><p>DB 最优的情况下也会有行锁。DB 是传统的瓶颈项</p>
+</li>
+<li><p>不要把 DB 当成逻辑处理单元，要尽量简单的增删改查逻辑</p>
+</li>
+<li><p>能在 Java 代码处理的逻辑，不要让 DB 来处理</p>
+</li>
+<li><p>思考  NoSQL 的来源，就是为了避免 SQL 的复杂</p>
+</li>
+</ul>
+</li>
+<li><p>第三方调用</p>
+<ul>
+<li>不影响用户预期的，放到任务表，由其它项目操作<ul>
+<li>使用新建线程，也会占用当前 JVM 资源，尽量丢给别的项目干活。即“微服务”的思想</li>
+</ul>
+</li>
+<li>例如发送短信验证码接口<ul>
+<li>接口只保存任务，即返回接口成功</li>
+<li>其它项目再调用接口API发送短信</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>消息队列</p>
+<ul>
+<li>关注消息队列发消息耗时</li>
+<li>例如南海云课堂上传视频到OSS<ul>
+<li>biz 保存任务到DB</li>
+<li>新项目（多个实例部署）去完成任务。</li>
+<li>传视频的任务耗时长，不适合放在接口主项目，占用资源，影响其它接口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>接口准入</p>
+<ul>
+<li>公司内部的接口，给内部的网页/APP 接口时，也要使用鉴权，例如 APPID/SECRECT</li>
+<li>把接口提供给外面的公司使用时，为对方新建 APPID/SECRECT 。</li>
+</ul>
+</li>
+<li><p>功能切割</p>
+<ul>
+<li>把上传功能做成独立的项目并提供接口。服务器配置文件控制 文件保存到  FastDFS 或者 阿里云 OSS，或者 其它的品牌的对象存储（如华为云的对象存储）</li>
+<li>统一文件上传的逻辑。网页/客户端 通过上传接口获取到文件 URL，调用接口保存表单时在接口只传递 URL 参数。（参考 UEditor 的做法）</li>
+</ul>
+</li>
+<li><p>版权</p>
+<ul>
+<li>尽量使用 OpenJDK，不要使用 Oracle JDK 的独有功能。后者可能会带来版权问题。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Web前端"><a href="#Web前端" class="headerlink" title="Web前端"></a>Web前端</h2><p>特别要注意前面 “通用“ 章节的说明</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">mailbyms@gmail.com</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mailbyms.github.io/2021/02/22/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">https://mailbyms.github.io/2021/02/22/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mailbyms.github.io" target="_blank">那山.那樹.那豬</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java</a><a class="post-meta__tags" href="/tags/%E8%A7%84%E8%8C%83/">规范</a><a class="post-meta__tags" href="/tags/vue/">vue</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/02/22/%E5%8D%97%E6%B5%B7%E4%BA%91%E8%AF%BE%E5%A0%82%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90%E8%A7%84%E6%A0%BC/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">南海云课堂阿里云资源规格</div></div></a></div><div class="next-post pull-right"><a href="/2021/02/22/%E9%83%A8%E7%BD%B2%E8%A7%84%E8%8C%83v1.0/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">部署规范v1.0</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">mailbyms@gmail.com</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="toc-number">1.</span> <span class="toc-text">开发规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.</span> <span class="toc-text">开发工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8-Visual-Studio-Code"><span class="toc-number">1.2.</span> <span class="toc-text">网站开发使用 Visual Studio Code</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">通用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-number">1.4.</span> <span class="toc-text">Java</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88"><span class="toc-number">1.4.1.</span> <span class="toc-text">常见的性能瓶颈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web%E5%89%8D%E7%AB%AF"><span class="toc-number">1.5.</span> <span class="toc-text">Web前端</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/29/mall4j%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E/" title="mall4j部署说明">mall4j部署说明</a><time datetime="2021-07-29T08:51:07.000Z" title="发表于 2021-07-29 16:51:07">2021-07-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/06/07/ApachKafka%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/" title="ApachKafka实战笔记">ApachKafka实战笔记</a><time datetime="2021-06-07T08:51:07.000Z" title="发表于 2021-06-07 16:51:07">2021-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/05/26/Sonar-iOS%E6%89%AB%E6%8F%8F/" title="categories">categories</a><time datetime="2021-05-26T08:51:07.000Z" title="发表于 2021-05-26 16:51:07">2021-05-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/05/21/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E8%A6%81%E6%B1%82/" title="项目部署要求">项目部署要求</a><time datetime="2021-05-21T08:51:07.000Z" title="发表于 2021-05-21 16:51:07">2021-05-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%A4%87%E4%BB%BDOSS%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6/" title="备份OSS视频文件">备份OSS视频文件</a><time datetime="2021-04-28T08:51:07.000Z" title="发表于 2021-04-28 16:51:07">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By mailbyms@gmail.com</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

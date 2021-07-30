@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>canal-adapter配置 | 那山.那樹.那豬</title><meta name="keywords" content="服务器"><meta name="author" content="mailbyms@gmail.com"><meta name="copyright" content="mailbyms@gmail.com"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;jcmj123456&#x2F;article&#x2F;details&#x2F;109705562 MySQLMySQL 需开启 binlog 写入功能，并配置 binlog-format 为 ROW 模式 1234[mysqld]log-bin&#x3D;mysql-bin # 开启 binlogbinlog-format&#x3D;ROW # 选择 ROW 模式server_id&#x3D;1 #">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canal-adapter配置">
+<meta property="og:url" content="https://mailbyms.github.io/2021/02/22/canal-adapter%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="那山.那樹.那豬">
+<meta property="og:description" content="参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;jcmj123456&#x2F;article&#x2F;details&#x2F;109705562 MySQLMySQL 需开启 binlog 写入功能，并配置 binlog-format 为 ROW 模式 1234[mysqld]log-bin&#x3D;mysql-bin # 开启 binlogbinlog-format&#x3D;ROW # 选择 ROW 模式server_id&#x3D;1 #">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-02-22T08:51:07.000Z">
+<meta property="article:modified_time" content="2021-07-30T03:21:32.849Z">
+<meta property="article:author" content="mailbyms@gmail.com">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mailbyms.github.io/2021/02/22/canal-adapter%E9%85%8D%E7%BD%AE/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'canal-adapter配置',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-30 11:21:32'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">那山.那樹.那豬</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">canal-adapter配置</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-02-22T08:51:07.000Z" title="发表于 2021-02-22 16:51:07">2021-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-30T03:21:32.849Z" title="更新于 2021-07-30 11:21:32">2021-07-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%83%A8%E7%BD%B2/">部署</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%83%A8%E7%BD%B2/%E6%94%BB%E7%95%A5/">攻略</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="canal-adapter配置"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jcmj123456/article/details/109705562">https://blog.csdn.net/jcmj123456/article/details/109705562</a></p>
+<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><p>MySQL 需开启 binlog 写入功能，并配置 binlog-format 为 ROW 模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin # 开启 binlog</span><br><span class="line">binlog-format=ROW # 选择 ROW 模式</span><br><span class="line">server_id=1 # 配置 MySQL replaction 需要</span><br></pre></td></tr></table></figure>
+<p>检查数据库是否打开上述开关  </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%log_bin%&#x27;</span></span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;binlog_format%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>创建 canal 账号，用于 canal 连接 MySQL， 该账号必须具有作为 MySQL slave 的权限，如使用已有账户，可直接使用 grant 命令授权</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> canal IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;canal&#x27;</span>;  </span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="comment">-- GRANT ALL PRIVILEGES ON *.* TO &#x27;canal&#x27;@&#x27;%&#x27; ;</span></span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p>假设有数据库表 <code>product</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE `product`  (</span><br><span class="line">  `id` bigint(20) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `title` varchar(255),</span><br><span class="line">  `sub_title` varchar(255),</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Canal-Server"><a href="#Canal-Server" class="headerlink" title="Canal Server"></a>Canal Server</h2><p>使用 docker 启动，参考<a target="_blank" rel="noopener" href="https://github.com/alibaba/canal/wiki/Docker-QuickStart">https://github.com/alibaba/canal/wiki/Docker-QuickStart</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载脚本</span></span><br><span class="line">wget https://raw.githubusercontent.com/alibaba/canal/master/docker/run.sh </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 构建一个destination name为<span class="built_in">test</span>的队列</span></span><br><span class="line">sh run.sh -e canal.auto.scan=false \</span><br><span class="line">		  -e canal.destinations=test \</span><br><span class="line">		  -e canal.instance.master.address=127.0.0.1:3306  \</span><br><span class="line">		  -e canal.instance.dbUsername=canal  \</span><br><span class="line">		  -e canal.instance.dbPassword=canal  \</span><br><span class="line">		  -e canal.instance.connectionCharset=UTF-8 \</span><br><span class="line">		  -e canal.instance.tsdb.enable=true \</span><br><span class="line">		  -e canal.instance.gtidon=false</span><br><span class="line"><span class="meta">#</span><span class="bash"> 最终会变为：docker run -d -it -h 0 &#123;上面所有的 -e 参数&#125; --name=canal-server --net=host -m 4096m canal/canal-server</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Elastic-设置"><a href="#Elastic-设置" class="headerlink" title="Elastic 设置"></a>Elastic 设置</h2><p>先运行一个没有 xpack 功能的集群，版本是 7.10.2</p>
+<p>创建数据库表 product 对应的索引，在 kibana 的 dev_tools 里运行：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">PUT product</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;mappings&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;properties&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;id&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;integer&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">&quot;title&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">&quot;sub_title&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Canal-Adapter-部署"><a href="#Canal-Adapter-部署" class="headerlink" title="Canal-Adapter 部署"></a>Canal-Adapter 部署</h2><ul>
+<li><p>从 github 上下载并解压 release 包  <a target="_blank" rel="noopener" href="https://github.com/alibaba/canal/releases/download/canal-1.1.5/canal.adapter-1.1.5.tar.gz">https://github.com/alibaba/canal/releases/download/canal-1.1.5/canal.adapter-1.1.5.tar.gz</a></p>
+</li>
+<li><p>由于发布包里的 <code> client-adapter.es7x</code>有 bug，会出现 com.alibaba.druid.pool.DruidDataSource cannot be cast to com.alibaba.druid.pool.DruidDataSource  的 bug，见 <a target="_blank" rel="noopener" href="https://github.com/alibaba/canal/issues/3144">issue 3144</a>，需要重新编译：</p>
+<ul>
+<li>下载源码 <a target="_blank" rel="noopener" href="https://github.com/alibaba/canal/archive/refs/tags/canal-1.1.5.tar.gz">https://github.com/alibaba/canal/archive/refs/tags/canal-1.1.5.tar.gz</a></li>
+<li>修改 client-adapter/escore 目录下的 pom.xml，在 druid 的依赖定义增加<code>&lt;scope&gt;provided&lt;/scope&gt;</code></li>
+<li>在项目的<strong>根目录</strong>下编译。用新编译出来的 client-adapter.es7x-1.1.5-jar-with-dependencies.jar ，替换原来 plugin 目录下的</li>
+</ul>
+</li>
+<li><p>配置 canal-adapter 的 conf/application.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">canal.conf:</span></span><br><span class="line">  <span class="attr">mode:</span> <span class="string">tcp</span> <span class="comment">#tcp kafka rocketMQ rabbitMQ</span></span><br><span class="line">  <span class="attr">consumerProperties:</span></span><br><span class="line">    <span class="comment"># canal tcp consumer</span></span><br><span class="line">    <span class="attr">canal.tcp.server.host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:11111</span></span><br><span class="line">  <span class="attr">srcDataSources:</span></span><br><span class="line">    <span class="attr">defaultDS:</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/&#123;DBName&#125;?useUnicode=true</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">canal</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">canal</span>  </span><br><span class="line">  <span class="attr">canalAdapters:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">instance:</span> <span class="string">test</span> <span class="comment"># 对应启动 canal server 时的 canal.destinations</span></span><br><span class="line">    <span class="attr">groups:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">groupId:</span> <span class="string">g1</span></span><br><span class="line">      <span class="attr">outerAdapters:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">logger</span></span><br><span class="line">      </span><br><span class="line"><span class="comment"># 重点在这里，输出到 es 的定义      </span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">es7</span></span><br><span class="line">        <span class="attr">hosts:</span> <span class="string">http://192.168.1.194:9200</span> <span class="comment">#172.22.0.2:9300 # 127.0.0.1:9200 for rest mode</span></span><br><span class="line">        <span class="attr">properties:</span></span><br><span class="line">          <span class="attr">mode:</span> <span class="string">rest</span> <span class="comment">#transport # or rest</span></span><br><span class="line">          <span class="comment">#security.auth: elastic:123456 #  only used for rest mode</span></span><br><span class="line">          <span class="attr">cluster.name:</span> <span class="string">es-docker-cluster</span> <span class="comment"># 在启动 es 集群的 docker-compose.yml里有</span></span><br></pre></td></tr></table></figure></li>
+<li><p>上面在 outerAdapters 里定义了 es7 ，则会加载 conf/es7 文件夹里的 yml 文件，</p>
+<p>假设有 product.yml：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">dataSourceKey:</span> <span class="string">defaultDS</span></span><br><span class="line"><span class="attr">destination:</span> <span class="string">test</span> </span><br><span class="line"><span class="attr">groupId:</span> <span class="string">g1</span></span><br><span class="line"><span class="attr">esMapping:</span></span><br><span class="line">  <span class="attr">_index:</span> <span class="string">product</span></span><br><span class="line">  <span class="attr">_id:</span> <span class="string">id</span></span><br><span class="line">  <span class="attr">sql:</span> <span class="string">&quot;select t.id, t.title, t.sub_title from product t&quot;</span></span><br><span class="line">  <span class="comment">#  etlCondition: &quot;where t.c_time&gt;=&#123;&#125;&quot;</span></span><br><span class="line">  <span class="attr">commitBatch:</span> <span class="number">3000</span></span><br></pre></td></tr></table></figure></li>
+<li><p>第一次要手工全量导入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl http://127.0.0.1:8081/etl/es7/product.yml -X POST</span><br><span class="line"><span class="meta">#</span><span class="bash"> 正常时会返回导入多少数据</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改数据库表内容，看 es 里的数据是否改变，在 kibana 的 dev_tools 里运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET product/_search</span><br></pre></td></tr></table></figure></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">mailbyms@gmail.com</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mailbyms.github.io/2021/02/22/canal-adapter%E9%85%8D%E7%BD%AE/">https://mailbyms.github.io/2021/02/22/canal-adapter%E9%85%8D%E7%BD%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mailbyms.github.io" target="_blank">那山.那樹.那豬</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/04/08/%E6%B8%85%E9%99%A4OSS%E5%A4%9A%E4%BD%99mp4%E6%96%87%E4%BB%B6/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">清除OSS多余mp4文件</div></div></a></div><div class="next-post pull-right"><a href="/2021/02/22/%E5%8D%97%E6%B5%B7%E4%BA%91%E8%AF%BE%E5%A0%82%E9%98%BF%E9%87%8C%E4%BA%91%E8%B5%84%E6%BA%90%E8%A7%84%E6%A0%BC/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">南海云课堂阿里云资源规格</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/07/29/mall4j部署说明/" title="mall4j部署说明"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-29</div><div class="title">mall4j部署说明</div></div></a></div><div><a href="/2021/02/22/南海云课堂阿里云资源规格/" title="南海云课堂阿里云资源规格"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-22</div><div class="title">南海云课堂阿里云资源规格</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">mailbyms@gmail.com</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL"><span class="toc-number">1.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Canal-Server"><span class="toc-number">2.</span> <span class="toc-text">Canal Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Elastic-%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">Elastic 设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Canal-Adapter-%E9%83%A8%E7%BD%B2"><span class="toc-number">4.</span> <span class="toc-text">Canal-Adapter 部署</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/29/mall4j%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E/" title="mall4j部署说明">mall4j部署说明</a><time datetime="2021-07-29T08:51:07.000Z" title="发表于 2021-07-29 16:51:07">2021-07-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/06/07/ApachKafka%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/" title="ApachKafka实战笔记">ApachKafka实战笔记</a><time datetime="2021-06-07T08:51:07.000Z" title="发表于 2021-06-07 16:51:07">2021-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/05/26/Sonar-iOS%E6%89%AB%E6%8F%8F/" title="categories">categories</a><time datetime="2021-05-26T08:51:07.000Z" title="发表于 2021-05-26 16:51:07">2021-05-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/05/21/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E8%A6%81%E6%B1%82/" title="项目部署要求">项目部署要求</a><time datetime="2021-05-21T08:51:07.000Z" title="发表于 2021-05-21 16:51:07">2021-05-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%A4%87%E4%BB%BDOSS%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6/" title="备份OSS视频文件">备份OSS视频文件</a><time datetime="2021-04-28T08:51:07.000Z" title="发表于 2021-04-28 16:51:07">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By mailbyms@gmail.com</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
