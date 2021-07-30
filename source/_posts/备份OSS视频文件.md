@@ -2,7 +2,8 @@
 title: 备份OSS视频文件
 date: 2021-04-28 16:51:07
 categories:
-  - 运维脚本
+  - 运维
+  - 脚本
 tags:
   - shell
 ---
